@@ -55,7 +55,7 @@ int main()
     
     for (int i=0; i<N; i++)
     {
-      x[i] = i*h;
+      x[i] = A + i*h;
       f[i] = func(x[i]);
     }
     
