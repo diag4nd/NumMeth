@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <iomanip>
 #define A 1
@@ -60,15 +60,24 @@ double getStartPosition(function f, function ddf, double xLeft, double xRight)
 double newtonSolve(function f, function df, double xLeft, double xRight, double epsilon, double x0)
 {
     double root(0), xnew(0), xold(x0);
+    int iter(1);
+    std::cout << "Iteration: " << iter << std::endl;
     xnew = xold - f(xold) / df(xold);
     bool a = breakCheck1(xnew, xold, epsilon);
     bool b = breakCheck2(func, xnew, epsilon);
     while (not(a or b))
     {
+        iter++;
+        std::cout << "Iteration: " << iter << std::endl;
         xold = xnew;
         xnew = xold - f(xold) / df(xold);
         a = breakCheck1(xnew, xold, epsilon);
         b = breakCheck2(func, xnew, epsilon);
+        if (iter > 100)
+        {
+            std::cout << "Too many" << std::endl;
+            break;
+        }
     }
     root = xnew;
     return root;
